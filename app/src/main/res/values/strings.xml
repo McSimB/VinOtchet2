@@ -1,0 +1,7 @@
+<resources>
+	<string name="app_name">ВинОтчёт</string>
+	<string name="title_activity_main">ВинОтчёт</string>
+	<string name="action_settings">Settings</string>
+	<string name="section_format">Hello World from section: %1$d</string>
+	<string name="img_content_description">Image</string>
+</resources>
