@@ -8,6 +8,8 @@ import android.widget.TextView;
 import com.mcsimb.vinotchet2.MainFragment.OnFragmentInteractionListener;
 import java.util.List;
 import android.graphics.drawable.Drawable;
+import android.content.res.Resources;
+import android.widget.ImageView;
 
 public class MainRecyclerAdapter extends RecyclerView.Adapter<MainRecyclerAdapter.ViewHolder> {
 
@@ -32,6 +34,7 @@ public class MainRecyclerAdapter extends RecyclerView.Adapter<MainRecyclerAdapte
 		holder.mWineView.setText(mValues.get(position).wine);
 		holder.mCounter1View.setText(mValues.get(position).counter1);
 		holder.mCounter2View.setText(mValues.get(position).counter2);
+		holder.mIconView.setImageResource(R.drawable.ic_0);
 
 		holder.mView.setOnClickListener(new View.OnClickListener() {
 				@Override
@@ -56,7 +59,7 @@ public class MainRecyclerAdapter extends RecyclerView.Adapter<MainRecyclerAdapte
 		public final TextView mWineView;
 		public final TextView mCounter1View;
 		public final TextView mCounter2View;
-		//public final Drawable mIcon;
+		public final ImageView mIconView;
 		public RecyclerContent.Item mItem;
 
 		public ViewHolder(View view) {
@@ -65,7 +68,7 @@ public class MainRecyclerAdapter extends RecyclerView.Adapter<MainRecyclerAdapte
 			mWineView = (TextView) view.findViewById(R.id.text_wine_main);
 			mCounter1View = (TextView) view.findViewById(R.id.text_counter1_main);
 			mCounter2View = (TextView) view.findViewById(R.id.text_counter2_main);
-			//mIcon = = (Drawable) view.findViewById(R.id.ic_main);
+			mIconView = (ImageView) view.findViewById(R.id.ic_main);
 		}
 	}
 
