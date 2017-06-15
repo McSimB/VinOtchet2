@@ -3,57 +3,36 @@ package com.mcsimb.vinotchet2;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.mcsimb.vinotchet2.dummy.DummyContent;
-import com.mcsimb.vinotchet2.dummy.DummyContent.DummyItem;
-
-/**
- * A fragment representing a list of Items.
- * <p/>
- * Activities containing this fragment MUST implement the {@link OnFragmentInteractionListener}
- * interface.
- */
 public class MainFragment extends Fragment {
 
-	// TODO: Customize parameter argument names
-	private static final String ARG_COLUMN_COUNT = "column-count";
-	private static final String ARG_POSITION = "position";
-	// TODO: Customize parameters
-	private int mColumnCount = 1;
 	private OnFragmentInteractionListener mListener;
 
-	/**
-	 * Mandatory empty constructor for the fragment manager to instantiate the
-	 * fragment (e.g. upon screen orientation changes).
-	 */
 	public MainFragment() {
 	}
 
 	public static MainFragment newInstance(int position) {
 		MainFragment fragment = new MainFragment();
-		Bundle args = new Bundle();
-		args.putInt(ARG_POSITION, position);
-		fragment.setArguments(args);
 		return fragment;
 	}
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 							 Bundle savedInstanceState) {
-		Bundle args = getArguments();
-		int position = args.getInt(ARG_POSITION);
-		View view = inflater.inflate(R.layout.fragment_item_list_main, container, false);
+		View view = inflater.inflate(R.layout.fragment_main, container, false);
 
 		if (view instanceof RecyclerView) {
 			Context context = view.getContext();
 			RecyclerView recyclerView = (RecyclerView) view;
 			recyclerView.setLayoutManager(new LinearLayoutManager(context));
-			recyclerView.setAdapter(new MainRecyclerViewAdapter(DummyContent.ITEMS, mListener));
+			recyclerView.setAdapter(new MainRecyclerAdapter(RecyclerContent.ITEMS, mListener));
 		}
 		return view;
 	}
@@ -87,7 +66,29 @@ public class MainFragment extends Fragment {
 	 */
 	public interface OnFragmentInteractionListener {
 		// TODO: Update argument type and name
-		void onFragmentInteraction(DummyItem item);
+		void onFragmentInteraction(RecyclerContent.Item item);
+	}
+	
+	public static class MainFragmentStatePagerAdapter extends FragmentStatePagerAdapter {
+
+		MainFragmentStatePagerAdapter(FragmentManager fm) {
+			super(fm);
+		}
+
+		@Override
+		public Fragment getItem(int position) {
+			return MainFragment.newInstance(position);
+		}
+
+		@Override
+		public int getCount() {
+			return RecyclerContent.ITEMS.size();
+		}
+
+		@Override
+		public CharSequence getPageTitle(int position) {
+			return position + "";
+		}
 	}
 
 }

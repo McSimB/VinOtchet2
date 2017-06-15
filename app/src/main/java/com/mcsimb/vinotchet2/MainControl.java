@@ -37,7 +37,7 @@ class MainControl {
 		}
 	}
 
-	public ArrayList<MainRecyclerItem> getDayItems(CharSequence day) {
+	/*public ArrayList<MainRecyclerItem> getDayItems(CharSequence day) {
 		ArrayList<MainRecyclerItem> mainRecyclerItems = new ArrayList<>();
 		for (String[] data : FileUtils.dataBase) {
 			if (data[0].equals(day)) {
@@ -46,7 +46,7 @@ class MainControl {
 			}
 		}
 		return mainRecyclerItems;
-	}
+	}*/
 
 	public void removeData(String day, int pos) {
 		int index = -1;
