@@ -4,19 +4,19 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
-import com.mcsimb.vinotchet2.MainFragment.OnFragmentInteractionListener;
-import java.util.List;
-import android.graphics.drawable.Drawable;
-import android.content.res.Resources;
 import android.widget.ImageView;
+import android.widget.TextView;
 
-public class MainRecyclerAdapter extends RecyclerView.Adapter<MainRecyclerAdapter.ViewHolder> {
+import com.mcsimb.vinotchet2.MainFragment.OnFragmentInteractionListener;
+
+import java.util.List;
+
+class MainRecyclerAdapter extends RecyclerView.Adapter<MainRecyclerAdapter.ViewHolder> {
 
 	private final List<RecyclerContent.Item> mValues;
 	private final OnFragmentInteractionListener mListener;
 
-	public MainRecyclerAdapter(List<RecyclerContent.Item> items, OnFragmentInteractionListener listener) {
+	MainRecyclerAdapter(List<RecyclerContent.Item> items, OnFragmentInteractionListener listener) {
 		mValues = items;
 		mListener = listener;
 	}
@@ -24,7 +24,7 @@ public class MainRecyclerAdapter extends RecyclerView.Adapter<MainRecyclerAdapte
 	@Override
 	public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 		View view = LayoutInflater.from(parent.getContext())
-			.inflate(R.layout.recycler_item_main, parent, false);
+				.inflate(R.layout.recycler_item_main, parent, false);
 		return new ViewHolder(view);
 	}
 
@@ -37,15 +37,15 @@ public class MainRecyclerAdapter extends RecyclerView.Adapter<MainRecyclerAdapte
 		holder.mIconView.setImageResource(R.drawable.ic_0);
 
 		holder.mView.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					if (null != mListener) {
-						// Notify the active callbacks interface (the activity, if the
-						// fragment is attached to one) that an item has been selected.
-						mListener.onFragmentInteraction(holder.mItem);
-					}
+			@Override
+			public void onClick(View v) {
+				if (null != mListener) {
+					// Notify the active callbacks interface (the activity, if the
+					// fragment is attached to one) that an item has been selected.
+					mListener.onFragmentInteraction(holder.mItem);
 				}
-			});
+			}
+		});
 	}
 
 	@Override
@@ -53,16 +53,16 @@ public class MainRecyclerAdapter extends RecyclerView.Adapter<MainRecyclerAdapte
 		return mValues.size();
 	}
 
-	public class ViewHolder extends RecyclerView.ViewHolder {
+	class ViewHolder extends RecyclerView.ViewHolder {
 
-		public final View mView;
-		public final TextView mWineView;
-		public final TextView mCounter1View;
-		public final TextView mCounter2View;
-		public final ImageView mIconView;
-		public RecyclerContent.Item mItem;
+		final View mView;
+		final TextView mWineView;
+		final TextView mCounter1View;
+		final TextView mCounter2View;
+		final ImageView mIconView;
+		RecyclerContent.Item mItem;
 
-		public ViewHolder(View view) {
+		ViewHolder(View view) {
 			super(view);
 			mView = view;
 			mWineView = (TextView) view.findViewById(R.id.text_wine_main);

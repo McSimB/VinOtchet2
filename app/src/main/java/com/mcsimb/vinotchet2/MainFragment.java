@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 
 public class MainFragment extends Fragment {
 
+	private static final String ARG_POSITION = "position";
 	private OnFragmentInteractionListener mListener;
 
 	public MainFragment() {
@@ -20,19 +21,24 @@ public class MainFragment extends Fragment {
 
 	public static MainFragment newInstance(int position) {
 		MainFragment fragment = new MainFragment();
+		Bundle arguments = new Bundle();
+		arguments.putInt(ARG_POSITION, position);
+		fragment.setArguments(arguments);
 		return fragment;
 	}
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 							 Bundle savedInstanceState) {
+		Bundle arguments = getArguments();
+		int position = arguments.getInt(ARG_POSITION);
 		View view = inflater.inflate(R.layout.fragment_main, container, false);
-
 		if (view instanceof RecyclerView) {
 			Context context = view.getContext();
 			RecyclerView recyclerView = (RecyclerView) view;
 			recyclerView.setLayoutManager(new LinearLayoutManager(context));
-			recyclerView.setAdapter(new MainRecyclerAdapter(RecyclerContent.ITEMS, mListener));
+			recyclerView.setAdapter(
+					new MainRecyclerAdapter(RecyclerContent.getItems(position), mListener));
 		}
 		return view;
 	}
@@ -65,7 +71,6 @@ public class MainFragment extends Fragment {
 	 * >Communicating with Other Fragments</a> for more information.
 	 */
 	public interface OnFragmentInteractionListener {
-		// TODO: Update argument type and name
 		void onFragmentInteraction(RecyclerContent.Item item);
 	}
 	
@@ -82,7 +87,7 @@ public class MainFragment extends Fragment {
 
 		@Override
 		public int getCount() {
-			return RecyclerContent.ITEMS.size();
+			return 4;
 		}
 
 		@Override

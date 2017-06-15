@@ -10,7 +10,7 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity
-implements MainFragment.OnFragmentInteractionListener {
+		implements MainFragment.OnFragmentInteractionListener {
 
 	private MainFragment.MainFragmentStatePagerAdapter mFragmentStatePagerAdapter;
 	private ViewPager mPager;
@@ -31,7 +31,7 @@ implements MainFragment.OnFragmentInteractionListener {
 		//mControl.initControl("05");
 
 		mFragmentStatePagerAdapter = new MainFragment
-			.MainFragmentStatePagerAdapter(getSupportFragmentManager());
+				.MainFragmentStatePagerAdapter(getSupportFragmentManager());
 		mPager = (ViewPager) findViewById(R.id.pager_main);
 		mPager.setAdapter(mFragmentStatePagerAdapter);
 
@@ -47,7 +47,7 @@ implements MainFragment.OnFragmentInteractionListener {
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		int id = item.getItemId();
+		//int id = item.getItemId();
 		//noinspection SimplifiableIfStatement
 		//if (id == R.id.action_settings) {
 		//	return true;

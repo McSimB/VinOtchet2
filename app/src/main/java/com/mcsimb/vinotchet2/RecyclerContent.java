@@ -1,29 +1,29 @@
 package com.mcsimb.vinotchet2;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-public class RecyclerContent {
+class RecyclerContent {
 
-	public static final List<Item> ITEMS = new ArrayList<Item>();
-	private static final int COUNT = 25;
+	private static final int COUNT = 2;
 
-	static {
+	static List<Item> getItems(int position) {
+		List<Item> items = new ArrayList<>();
 		for (int i = 1; i <= COUNT; i++) {
-			ITEMS.add(new Item("Мелодии лета 0.5", "2345", "2340", R.drawable.ic_0));
+			items.add(new Item("Мелодии лета 0.5", String.valueOf(position),
+					String.valueOf(position), R.drawable.ic_0));
 		}
+		return items;
 	}
 
-	public static class Item {
+	static class Item {
 
-		public final String wine;
-		public final String counter1;
-		public final String counter2;
-		public final int iconId;
+		final String wine;
+		final String counter1;
+		final String counter2;
+		final int iconId;
 
-		public Item(String wine, String counter1, String counter2, int iconId) {
+		Item(String wine, String counter1, String counter2, int iconId) {
 			this.wine = wine;
 			this.counter1 = counter1;
 			this.counter2 = counter2;
