@@ -21,6 +21,13 @@
 				<category android:name="android.intent.category.LAUNCHER"/>
 			</intent-filter>
 		</activity>
+
+		<activity
+			android:name=".AddActivity"
+			android:label="@string/title_activity_add"
+			android:theme="@style/AppTheme"
+			android:screenOrientation="portrait"
+			android:windowSoftInputMode="stateVisible|adjustResize" />
 	</application>
 
 </manifest>

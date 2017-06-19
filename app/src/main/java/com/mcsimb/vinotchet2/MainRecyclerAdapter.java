@@ -13,11 +13,11 @@ import java.util.List;
 
 class MainRecyclerAdapter extends RecyclerView.Adapter<MainRecyclerAdapter.ViewHolder> {
 
-	private final List<RecyclerContent.Item> mValues;
+	private final List<RecyclerContent.Item> mItems;
 	private final OnFragmentInteractionListener mListener;
 
 	MainRecyclerAdapter(List<RecyclerContent.Item> items, OnFragmentInteractionListener listener) {
-		mValues = items;
+		mItems = items;
 		mListener = listener;
 	}
 
@@ -30,10 +30,10 @@ class MainRecyclerAdapter extends RecyclerView.Adapter<MainRecyclerAdapter.ViewH
 
 	@Override
 	public void onBindViewHolder(final ViewHolder holder, int position) {
-		holder.mItem = mValues.get(position);
-		holder.mWineView.setText(mValues.get(position).wine);
-		holder.mCounter1View.setText(mValues.get(position).counter1);
-		holder.mCounter2View.setText(mValues.get(position).counter2);
+		holder.mItem = mItems.get(position);
+		holder.mWineView.setText(mItems.get(position).wine);
+		holder.mCounter1View.setText(mItems.get(position).counter1);
+		holder.mCounter2View.setText(mItems.get(position).counter2);
 		holder.mIconView.setImageResource(R.drawable.ic_0);
 
 		holder.mView.setOnClickListener(new View.OnClickListener() {
@@ -50,7 +50,7 @@ class MainRecyclerAdapter extends RecyclerView.Adapter<MainRecyclerAdapter.ViewH
 
 	@Override
 	public int getItemCount() {
-		return mValues.size();
+		return mItems.size();
 	}
 
 	class ViewHolder extends RecyclerView.ViewHolder {

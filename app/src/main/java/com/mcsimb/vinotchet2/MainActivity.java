@@ -1,5 +1,6 @@
 package com.mcsimb.vinotchet2;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
@@ -25,10 +26,12 @@ public class MainActivity extends AppCompatActivity
 		Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_main);
 		setSupportActionBar(toolbar);
 
-		//FileUtils.verifyStoragePermissions(this);
-		//FileUtils.pathExists();
-		//mControl = new MainControl();
-		//mControl.initControl("05");
+		FileUtils.verifyStoragePermissions(this);
+		FileUtils.pathExists();
+		mControl = new MainControl();
+		mControl.initControl("05");
+		//DBHelper dbHelper = new DBHelper(this);
+		//SQLiteDatabase db = openOrCreateDatabase(DB_NAME, Context.MODE_PRIVATE, null);
 
 		mFragmentStatePagerAdapter = new MainFragment
 				.MainFragmentStatePagerAdapter(getSupportFragmentManager());
@@ -41,17 +44,27 @@ public class MainActivity extends AppCompatActivity
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		//getMenuInflater().inflate(R.menu.menu_main, menu);
+		getMenuInflater().inflate(R.menu.menu_main, menu);
 		return true;
 	}
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		//int id = item.getItemId();
-		//noinspection SimplifiableIfStatement
-		//if (id == R.id.action_settings) {
-		//	return true;
-		//}
+		int id = item.getItemId();
+		if (id == R.id.menu_add_main) {
+			Intent intent = new Intent(this, AddActivity.class);
+			if (!FileUtils.dataBase.isEmpty()) {
+				intent.putExtra("day", FileUtils.dataBase.get(FileUtils.dataBase.size() - 1)[0]);
+			} else
+				intent.putExtra("day", "1");
+			intent.putExtra("month", FileUtils.month);
+			intent.putExtra("year", "17");
+			intent.putExtra("sort_list",
+					FileUtils.winesList.keySet()
+							.toArray(new String[FileUtils.winesList.size()]));
+			startActivityForResult(intent, 1);
+			return true;
+		}
 		return super.onOptionsItemSelected(item);
 	}
 
