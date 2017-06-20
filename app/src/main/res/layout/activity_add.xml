@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:orientation="vertical">
+
+	<android.support.design.widget.AppBarLayout
+		android:id="@+id/appbar_add"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:theme="@style/AppTheme.AppBarOverlay">
+
+		<android.support.v7.widget.Toolbar
+			android:id="@+id/toolbar_add"
+			android:layout_width="match_parent"
+			android:layout_height="?attr/actionBarSize"
+			android:theme="@style/AppTheme.AppBarOverlay"
+			app:popupTheme="@style/AppTheme.PopupOverlay"/>
+
+	</android.support.design.widget.AppBarLayout>
+
+	<TextView
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:gravity="center_horizontal"
+		android:labelFor="@+id/text_set_date_add"
+		android:text="@string/date"
+		tools:text="Дата:"/>
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:gravity="center"
+		android:orientation="horizontal">
+
+		<EditText
+			android:id="@id/text_set_date_add"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:inputType="date"
+			android:selectAllOnFocus="true"
+			android:textSize="30sp"
+			tools:text="24"/>
+
+		<TextView
+			android:id="@+id/text_month_year_add"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:textSize="30sp"
+			tools:text=".05.17"/>
+
+	</LinearLayout>
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginTop="2dp"
+		android:orientation="horizontal">
+
+		<Spinner
+			android:id="@+id/spinner_set_wine_add"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_weight="1"
+			style="@style/Widget.AppCompat.Spinner.Underlined"/>
+
+		<Spinner
+			android:id="@+id/spinner_set_vol_add"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_weight="2"
+			style="@style/Widget.AppCompat.Spinner.Underlined"/>
+
+	</LinearLayout>
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginTop="5dp"
+		android:orientation="horizontal">
+
+		<TextView
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center_vertical"
+			android:layout_weight="1"
+			android:gravity="center"
+			android:labelFor="@+id/text_counter1_add"
+			android:text="@string/counter1"/>
+
+		<EditText
+			android:id="@+id/text_counter1_add"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginLeft="10dp"
+			android:layout_marginRight="10dp"
+			android:layout_weight="1"
+			android:gravity="end"
+			android:inputType="number"
+			android:textSize="35sp"/>
+
+	</LinearLayout>
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginTop="5dp"
+		android:orientation="horizontal">
+
+		<TextView
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center_vertical"
+			android:layout_weight="1"
+			android:gravity="center"
+			android:labelFor="@+id/text_counter2_add"
+			android:text="@string/counter2"/>
+
+		<EditText
+			android:id="@+id/text_counter2_add"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginLeft="10dp"
+			android:layout_marginRight="10dp"
+			android:layout_weight="1"
+			android:gravity="end"
+			android:inputType="number"
+			android:textSize="35sp"/>
+
+	</LinearLayout>
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:layout_marginTop="5dp"
+		android:orientation="horizontal">
+
+		<Button
+			android:id="@+id/button_cancel_add"
+			style="?attr/buttonBarButtonStyle"
+			android:layout_width="match_parent"
+			android:layout_height="50dp"
+			android:layout_gravity="bottom"
+			android:layout_weight="1"
+			android:onClick="onClick"
+			android:text="@string/cancel"/>
+
+		<Button
+			android:id="@+id/button_ok_add"
+			style="?attr/buttonBarButtonStyle"
+			android:layout_width="match_parent"
+			android:layout_height="50dp"
+			android:layout_gravity="bottom"
+			android:layout_weight="1"
+			android:onClick="onClick"
+			android:text="@string/add"/>
+
+	</LinearLayout>
+
+</LinearLayout>
+

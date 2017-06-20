@@ -1,4 +1,5 @@
 <resources>
+
 	<string name="app_name">ВинОтчёт</string>
 	<string name="title_activity_main">ВинОтчёт</string>
 	<string name="title_activity_add">Добавить производство</string>
@@ -16,4 +17,6 @@
 	<string name="other_month">Выбрать другой месяц</string>
 	<string name="new_month">Новый месяц</string>
 	<string name="exit">Выход</string>
+	<string name="date">Дата:</string>
+
 </resources>

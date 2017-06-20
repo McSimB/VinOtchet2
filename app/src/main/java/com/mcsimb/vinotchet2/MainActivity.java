@@ -13,11 +13,6 @@ import android.widget.Toast;
 public class MainActivity extends AppCompatActivity
 		implements MainFragment.OnFragmentInteractionListener {
 
-	private MainFragment.MainFragmentStatePagerAdapter mFragmentStatePagerAdapter;
-	private ViewPager mPager;
-	private TabLayout mTabLayout;
-	private MainControl mControl;
-
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -28,17 +23,17 @@ public class MainActivity extends AppCompatActivity
 
 		FileUtils.verifyStoragePermissions(this);
 		FileUtils.pathExists();
-		mControl = new MainControl();
+		MainControl mControl = new MainControl();
 		mControl.initControl("05");
 		//DBHelper dbHelper = new DBHelper(this);
 		//SQLiteDatabase db = openOrCreateDatabase(DB_NAME, Context.MODE_PRIVATE, null);
 
-		mFragmentStatePagerAdapter = new MainFragment
+		MainFragment.MainFragmentStatePagerAdapter mFragmentStatePagerAdapter = new MainFragment
 				.MainFragmentStatePagerAdapter(getSupportFragmentManager());
-		mPager = (ViewPager) findViewById(R.id.pager_main);
+		ViewPager mPager = (ViewPager) findViewById(R.id.pager_main);
 		mPager.setAdapter(mFragmentStatePagerAdapter);
 
-		mTabLayout = (TabLayout) findViewById(R.id.tabs_main);
+		TabLayout mTabLayout = (TabLayout) findViewById(R.id.tabs_main);
 		mTabLayout.setupWithViewPager(mPager);
 	}
 
@@ -59,9 +54,9 @@ public class MainActivity extends AppCompatActivity
 				intent.putExtra("day", "1");
 			intent.putExtra("month", FileUtils.month);
 			intent.putExtra("year", "17");
-			intent.putExtra("sort_list",
-					FileUtils.winesList.keySet()
-							.toArray(new String[FileUtils.winesList.size()]));
+			intent.putExtra("wine_list",
+					FileUtils.wineList.keySet()
+							.toArray(new String[FileUtils.wineList.size()]));
 			startActivityForResult(intent, 1);
 			return true;
 		}

@@ -27,7 +27,7 @@ class FileUtils {
 			Manifest.permission.READ_EXTERNAL_STORAGE,
 			Manifest.permission.WRITE_EXTERNAL_STORAGE
 	};
-	static final Map<String, ArrayList<String>> winesList = new TreeMap<>();
+	static final Map<String, ArrayList<String>> wineList = new TreeMap<>();
 	static final Map<String, String[]> counters = new TreeMap<>();
 	static ArrayList<String[]> dataBase;
 	static String month = "00";

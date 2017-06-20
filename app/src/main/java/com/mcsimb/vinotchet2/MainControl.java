@@ -22,7 +22,7 @@ class MainControl {
 			sortsIcons.put(s[0], FileUtils.readIcon(s[0] + ".png"));
 			ArrayList<String> rest = new ArrayList<>();
 			rest.addAll(Arrays.asList(s).subList(1, s.length));
-			FileUtils.winesList.put(s[0], rest);
+			FileUtils.wineList.put(s[0], rest);
 		}
 		FileUtils.dataBase = FileUtils.readFile("data" + FileUtils.month);
 		for (String[] data : FileUtils.dataBase) {
@@ -65,18 +65,18 @@ class MainControl {
 	}
 
 	public void addBlend(String sort, String newBlend) {
-		ArrayList<String> blends = FileUtils.winesList.get(sort);
+		ArrayList<String> blends = FileUtils.wineList.get(sort);
 		if (Double.parseDouble(blends.get(blends.size() - 1)) == 0) {
 			blends.set(blends.size() - 1, newBlend);
 		} else {
 			blends.add(newBlend);
 		}
-		FileUtils.winesList.put(sort, blends);
+		FileUtils.wineList.put(sort, blends);
 		ArrayList<String[]> sorts = new ArrayList<>();
-		for (String s : FileUtils.winesList.keySet()) {
+		for (String s : FileUtils.wineList.keySet()) {
 			ArrayList<String> b = new ArrayList<>();
 			b.add(s);
-			b.addAll(FileUtils.winesList.get(s));
+			b.addAll(FileUtils.wineList.get(s));
 			sorts.add(b.toArray(new String[b.size()]));
 		}
 		FileUtils.writeFile("sorts" + FileUtils.month, sorts);
@@ -90,7 +90,7 @@ class MainControl {
 		int c05 = 0;
 		int c07 = 0;
 		Map<String, Integer> labels = new LinkedHashMap<>();
-		for (String s: FileUtils.winesList.keySet()) {
+		for (String s: FileUtils.wineList.keySet()) {
 			labels.put(s + v05, 0);
 			labels.put(s + v07, 0);
 		}
