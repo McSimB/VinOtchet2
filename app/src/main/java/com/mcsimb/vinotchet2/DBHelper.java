@@ -9,16 +9,15 @@ import android.util.Log;
 class DBHelper extends SQLiteOpenHelper {
 
 	final static int DB_VER = 1;
-	final static String DB_NAME = FileUtils.month + ".db";
-	final String TABLE_NAME = FileUtils.dataBase.get(0)[0];
-	final String WINE = "wine";
-	final String VOLUME = "volume";
-	final String COUNTER_1 = "counter_1";
-	final String COUNTER_2 = "counter_2";
-	final String CREATE_TABLE = "CREATE TABLE " + TABLE_NAME +
-			"(_id INTEGER PRIMARY KEY, " +
-			WINE + " TEXT, " + VOLUME + " TEXT, " + COUNTER_1 + " TEXT, " + COUNTER_2 + " TEXT)";
-	final String DROP_TABLE = "DROP TABLE IF EXISTS " + TABLE_NAME;
+	final static String DB_NAME = "2017.db";
+	final static String DAY = "day";
+	final static String WINE = "wine";
+	final static String VOLUME = "volume";
+	final static String COUNTER_1 = "counter_1";
+	final static String COUNTER_2 = "counter_2";
+	final static String ICON = "icon";
+	final String SORTS_TABLE = "sorts";
+	final String DATA_TABLE = "data";
 
 	Context mContext;
 
@@ -29,31 +28,29 @@ class DBHelper extends SQLiteOpenHelper {
 
 	@Override
 	public void onCreate(SQLiteDatabase db) {
-		db.execSQL(CREATE_TABLE);
-		fillData(db);
+		db.execSQL("CREATE TABLE " + SORTS_TABLE + " (_id INTEGER PRIMARY KEY, " + 
+				   WINE + " INTEGER, " + ICON + " INTEGER)");
+		db.execSQL("INSERT INTO " + SORTS_TABLE + " (1, " + R.string.wine0 + ", " + R.drawable.ic_0 + ")");
+		db.execSQL("INSERT INTO " + SORTS_TABLE + " (2, " + R.string.wine1 + ", " + R.drawable.ic_1 + ")");
+		db.execSQL("INSERT INTO " + SORTS_TABLE + " (3, " + R.string.wine2 + ", " + R.drawable.ic_2 + ")");
+		db.execSQL("INSERT INTO " + SORTS_TABLE + " (4, " + R.string.wine3 + ", " + R.drawable.ic_3 + ")");
 		db.close();
 	}
 
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-		db.execSQL(DROP_TABLE);
-		onCreate(db);
 	}
 
-	private void fillData(SQLiteDatabase db) {
-		if (db != null) {
-			ContentValues values;
-			String[] dat = FileUtils.dataBase.get(0);
-			values = new ContentValues();
-			values.put(WINE, dat[1]);
-			values.put(VOLUME, dat[2]);
-			values.put(COUNTER_1, dat[3]);
-			values.put(COUNTER_2, dat[4]);
-			db.insert(TABLE_NAME, null, values);
+	public void newMonth(String month) {
+		SQLiteDatabase db = getWritableDatabase();
+		db.execSQL("CREATE TABLE " + DATA_TABLE + month +
+				   " (_id INTEGER PRIMARY KEY, " + DAY + " TEXT, " + WINE + " TEXT, " + 
+				   VOLUME + " TEXT, " + COUNTER_1 + " INTEGER, " + COUNTER_2 + " INTEGER)");
+		db.close();
+	}
 
-		} else {
-			Log.d("DBHelper", "db null");
-		}
+	public void add() {
+
 	}
 
 }

@@ -38,7 +38,7 @@ public class MainFragment extends Fragment {
 			RecyclerView recyclerView = (RecyclerView) view;
 			recyclerView.setLayoutManager(new LinearLayoutManager(context));
 			recyclerView.setAdapter(
-					new MainRecyclerAdapter(RecyclerContent.getItems(position), mListener));
+					new MainRecyclerAdapter(RecyclerContent.getItems(context, position), mListener));
 		}
 		return view;
 	}
@@ -87,7 +87,7 @@ public class MainFragment extends Fragment {
 
 		@Override
 		public int getCount() {
-			return 4;
+			return 0;
 		}
 
 		@Override

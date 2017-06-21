@@ -18,5 +18,9 @@
 	<string name="new_month">Новый месяц</string>
 	<string name="exit">Выход</string>
 	<string name="date">Дата:</string>
+	<string name="wine0">Мелодии лета</string>
+	<string name="wine1">Миг удачи</string>
+	<string name="wine2">Раздолье</string>
+	<string name="wine3">Танец огня</string>
 
 </resources>

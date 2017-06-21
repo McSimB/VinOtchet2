@@ -34,7 +34,7 @@ class MainRecyclerAdapter extends RecyclerView.Adapter<MainRecyclerAdapter.ViewH
 		holder.mWineView.setText(mItems.get(position).wine);
 		holder.mCounter1View.setText(mItems.get(position).counter1);
 		holder.mCounter2View.setText(mItems.get(position).counter2);
-		holder.mIconView.setImageResource(R.drawable.ic_0);
+		holder.mIconView.setImageResource(mItems.get(position).iconId);
 
 		holder.mView.setOnClickListener(new View.OnClickListener() {
 			@Override

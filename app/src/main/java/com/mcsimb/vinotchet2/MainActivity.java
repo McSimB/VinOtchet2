@@ -9,10 +9,13 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
+import android.database.sqlite.SQLiteDatabase;
 
 public class MainActivity extends AppCompatActivity
 		implements MainFragment.OnFragmentInteractionListener {
 
+	public final static int REQUEST_CODE = 1;
+			
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -21,13 +24,11 @@ public class MainActivity extends AppCompatActivity
 		Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_main);
 		setSupportActionBar(toolbar);
 
-		FileUtils.verifyStoragePermissions(this);
-		FileUtils.pathExists();
-		MainControl mControl = new MainControl();
-		mControl.initControl("05");
-		//DBHelper dbHelper = new DBHelper(this);
-		//SQLiteDatabase db = openOrCreateDatabase(DB_NAME, Context.MODE_PRIVATE, null);
-
+		//FileUtils.verifyStoragePermissions(this);
+		//FileUtils.pathExists();
+		//MainControl mControl = new MainControl();
+		//mControl.initControl("05");
+		
 		MainFragment.MainFragmentStatePagerAdapter mFragmentStatePagerAdapter = new MainFragment
 				.MainFragmentStatePagerAdapter(getSupportFragmentManager());
 		ViewPager mPager = (ViewPager) findViewById(R.id.pager_main);
@@ -52,12 +53,12 @@ public class MainActivity extends AppCompatActivity
 				intent.putExtra("day", FileUtils.dataBase.get(FileUtils.dataBase.size() - 1)[0]);
 			} else
 				intent.putExtra("day", "1");
-			intent.putExtra("month", FileUtils.month);
+			intent.putExtra("month", FileUtils.MONTH);
 			intent.putExtra("year", "17");
 			intent.putExtra("wine_list",
 					FileUtils.wineList.keySet()
 							.toArray(new String[FileUtils.wineList.size()]));
-			startActivityForResult(intent, 1);
+			startActivityForResult(intent, REQUEST_CODE);
 			return true;
 		}
 		return super.onOptionsItemSelected(item);

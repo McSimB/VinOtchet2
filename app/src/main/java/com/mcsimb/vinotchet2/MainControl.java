@@ -14,23 +14,23 @@ class MainControl {
 	private Map<String, Bitmap> sortsIcons = new TreeMap<>();
 
 	void initControl(String m) {
-		FileUtils.month = m;
+		FileUtils.MONTH = m;
 		days.clear();
 		sortsIcons.clear();
-		ArrayList<String[]> sList = FileUtils.readFile("sorts" + FileUtils.month);
+		ArrayList<String[]> sList = FileUtils.readFile("sorts" + FileUtils.MONTH);
 		for (String[] s : sList) {
 			sortsIcons.put(s[0], FileUtils.readIcon(s[0] + ".png"));
 			ArrayList<String> rest = new ArrayList<>();
 			rest.addAll(Arrays.asList(s).subList(1, s.length));
 			FileUtils.wineList.put(s[0], rest);
 		}
-		FileUtils.dataBase = FileUtils.readFile("data" + FileUtils.month);
+		FileUtils.dataBase = FileUtils.readFile("data" + FileUtils.MONTH);
 		for (String[] data : FileUtils.dataBase) {
 			if (!days.contains(data[0])) {
 				days.add(data[0]);
 			}
 		}
-		ArrayList<String[]> counters = FileUtils.readFile("counters" + FileUtils.month);
+		ArrayList<String[]> counters = FileUtils.readFile("counters" + FileUtils.MONTH);
 		for (String[] s : counters) {
 			String[] c = Arrays.asList(s).subList(1, 5).toArray(new String[4]);
 			FileUtils.counters.put(s[0], c);
@@ -61,7 +61,7 @@ class MainControl {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		FileUtils.writeFile("data" + FileUtils.month, FileUtils.dataBase);
+		FileUtils.writeFile("data" + FileUtils.MONTH, FileUtils.dataBase);
 	}
 
 	public void addBlend(String sort, String newBlend) {
@@ -79,7 +79,7 @@ class MainControl {
 			b.addAll(FileUtils.wineList.get(s));
 			sorts.add(b.toArray(new String[b.size()]));
 		}
-		FileUtils.writeFile("sorts" + FileUtils.month, sorts);
+		FileUtils.writeFile("sorts" + FileUtils.MONTH, sorts);
 	}
 
 

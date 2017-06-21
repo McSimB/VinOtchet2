@@ -2,17 +2,16 @@ package com.mcsimb.vinotchet2;
 
 import java.util.ArrayList;
 import java.util.List;
+import android.content.Context;
 
 class RecyclerContent {
 
-	private static final int COUNT = 2;
-
-	static List<Item> getItems(int position) {
+	static List<Item> getItems(Context context, int position) {
 		List<Item> items = new ArrayList<>();
-		for (int i = 1; i <= COUNT; i++) {
-			items.add(new Item("Мелодии лета 0.5", String.valueOf(position),
-					String.valueOf(position), R.drawable.ic_0));
-		}
+		//for (int i = 1; i <= COUNT; i++) {
+		//	items.add(new Item("Мелодии лета 0.5", String.valueOf(position),
+		//			String.valueOf(position), R.drawable.ic_0));
+		//}
 		return items;
 	}
 

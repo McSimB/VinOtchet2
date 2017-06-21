@@ -22,15 +22,16 @@ import java.util.TreeMap;
 
 class FileUtils {
 
-	private static final int REQUEST_EXTERNAL_STORAGE = 1;
-	private static String[] PERMISSIONS_STORAGE = {
-			Manifest.permission.READ_EXTERNAL_STORAGE,
-			Manifest.permission.WRITE_EXTERNAL_STORAGE
-	};
 	static final Map<String, ArrayList<String>> wineList = new TreeMap<>();
 	static final Map<String, String[]> counters = new TreeMap<>();
 	static ArrayList<String[]> dataBase;
-	static String month = "00";
+	static String MONTH = "00";
+	
+	private static final int REQUEST_EXTERNAL_STORAGE = 1;
+	private static String[] PERMISSIONS_STORAGE = {
+		Manifest.permission.READ_EXTERNAL_STORAGE,
+		Manifest.permission.WRITE_EXTERNAL_STORAGE
+	};
 	private static final String DIR_SD = "VinOtchet";
 	private static final String EXT = ".txt";
 	private static BufferedWriter bw;
