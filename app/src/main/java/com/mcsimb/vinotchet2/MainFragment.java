@@ -11,6 +11,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.List;
+
 public class MainFragment extends Fragment {
 
 	private static final String ARG_POSITION = "position";
@@ -76,8 +78,11 @@ public class MainFragment extends Fragment {
 	
 	public static class MainFragmentStatePagerAdapter extends FragmentStatePagerAdapter {
 
-		MainFragmentStatePagerAdapter(FragmentManager fm) {
+		List<String> mDays;
+
+		MainFragmentStatePagerAdapter(FragmentManager fm, List<String> days) {
 			super(fm);
+			mDays = days;
 		}
 
 		@Override
@@ -87,12 +92,12 @@ public class MainFragment extends Fragment {
 
 		@Override
 		public int getCount() {
-			return 0;
+			return mDays.size();
 		}
 
 		@Override
 		public CharSequence getPageTitle(int position) {
-			return position + "";
+			return mDays.get(position);
 		}
 	}
 

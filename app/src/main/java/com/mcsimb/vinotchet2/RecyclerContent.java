@@ -1,17 +1,20 @@
 package com.mcsimb.vinotchet2;
 
+import android.content.Context;
+
 import java.util.ArrayList;
 import java.util.List;
-import android.content.Context;
 
 class RecyclerContent {
 
 	static List<Item> getItems(Context context, int position) {
 		List<Item> items = new ArrayList<>();
-		//for (int i = 1; i <= COUNT; i++) {
-		//	items.add(new Item("Мелодии лета 0.5", String.valueOf(position),
-		//			String.valueOf(position), R.drawable.ic_0));
-		//}
+		DBHelper dbHelper = new DBHelper(context);
+		List<String[]> entries = dbHelper.getDayEntries(position);
+		dbHelper.close();
+		for (String[] str : entries) {
+			items.add(new Item(str[0], str[1], str[2], Integer.decode(str[3])));
+		}
 		return items;
 	}
 

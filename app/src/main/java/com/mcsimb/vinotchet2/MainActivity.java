@@ -9,12 +9,13 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
-import android.database.sqlite.SQLiteDatabase;
 
 public class MainActivity extends AppCompatActivity
 		implements MainFragment.OnFragmentInteractionListener {
 
-	public final static int REQUEST_CODE = 1;
+	public static String MONTH = "06";
+	public static String YEAR = "2017";
+	private final static int REQUEST_CODE = 1;
 			
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -28,14 +29,19 @@ public class MainActivity extends AppCompatActivity
 		//FileUtils.pathExists();
 		//MainControl mControl = new MainControl();
 		//mControl.initControl("05");
-		
+
+		DBHelper dbHelper = new DBHelper(this);
+		//dbHelper.newMonth(MONTH);
+
 		MainFragment.MainFragmentStatePagerAdapter mFragmentStatePagerAdapter = new MainFragment
-				.MainFragmentStatePagerAdapter(getSupportFragmentManager());
+				.MainFragmentStatePagerAdapter(getSupportFragmentManager(), dbHelper.getDays());
 		ViewPager mPager = (ViewPager) findViewById(R.id.pager_main);
 		mPager.setAdapter(mFragmentStatePagerAdapter);
 
 		TabLayout mTabLayout = (TabLayout) findViewById(R.id.tabs_main);
 		mTabLayout.setupWithViewPager(mPager);
+
+		dbHelper.close();
 	}
 
 	@Override
@@ -49,15 +55,6 @@ public class MainActivity extends AppCompatActivity
 		int id = item.getItemId();
 		if (id == R.id.menu_add_main) {
 			Intent intent = new Intent(this, AddActivity.class);
-			if (!FileUtils.dataBase.isEmpty()) {
-				intent.putExtra("day", FileUtils.dataBase.get(FileUtils.dataBase.size() - 1)[0]);
-			} else
-				intent.putExtra("day", "1");
-			intent.putExtra("month", FileUtils.MONTH);
-			intent.putExtra("year", "17");
-			intent.putExtra("wine_list",
-					FileUtils.wineList.keySet()
-							.toArray(new String[FileUtils.wineList.size()]));
 			startActivityForResult(intent, REQUEST_CODE);
 			return true;
 		}
