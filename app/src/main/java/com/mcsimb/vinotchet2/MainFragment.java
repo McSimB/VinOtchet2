@@ -12,6 +12,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.List;
+import android.widget.Toast;
+import android.view.View.OnTouchListener;
+import android.view.MotionEvent;
 
 public class MainFragment extends Fragment {
 
@@ -33,18 +36,18 @@ public class MainFragment extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 							 Bundle savedInstanceState) {
 		Bundle arguments = getArguments();
-		int position = arguments.getInt(ARG_POSITION);
+		final int position = arguments.getInt(ARG_POSITION);
 		View view = inflater.inflate(R.layout.fragment_main, container, false);
 		if (view instanceof RecyclerView) {
-			Context context = view.getContext();
-			RecyclerView recyclerView = (RecyclerView) view;
+			final Context context = view.getContext();
+			final RecyclerView recyclerView = (RecyclerView) view;
 			recyclerView.setLayoutManager(new LinearLayoutManager(context));
 			recyclerView.setAdapter(
-					new MainRecyclerAdapter(RecyclerContent.getItems(context, position), mListener));
+				new MainRecyclerAdapter(RecyclerContent.getItems(context, position), mListener));
 		}
 		return view;
 	}
-
+	
 	@Override
 	public void onAttach(Context context) {
 		super.onAttach(context);
@@ -52,7 +55,7 @@ public class MainFragment extends Fragment {
 			mListener = (OnFragmentInteractionListener) context;
 		} else {
 			throw new RuntimeException(context.toString()
-					+ " must implement OnFragmentInteractionListener");
+									   + " must implement OnFragmentInteractionListener");
 		}
 	}
 
@@ -75,16 +78,20 @@ public class MainFragment extends Fragment {
 	public interface OnFragmentInteractionListener {
 		void onFragmentInteraction(RecyclerContent.Item item);
 	}
-	
+
 	public static class MainFragmentStatePagerAdapter extends FragmentStatePagerAdapter {
 
-		List<String> mDays;
+		private List<String> mPages;
 
-		MainFragmentStatePagerAdapter(FragmentManager fm, List<String> days) {
+		public MainFragmentStatePagerAdapter(FragmentManager fm) {
 			super(fm);
-			mDays = days;
 		}
 
+		public void setPages(List<String> pages) {
+			mPages = pages;
+			notifyDataSetChanged();
+		}
+		
 		@Override
 		public Fragment getItem(int position) {
 			return MainFragment.newInstance(position);
@@ -92,12 +99,13 @@ public class MainFragment extends Fragment {
 
 		@Override
 		public int getCount() {
-			return mDays.size();
+			return mPages.size();
 		}
 
 		@Override
 		public CharSequence getPageTitle(int position) {
-			return mDays.get(position);
+			return mPages.get(position) + "." + MainActivity.MONTH +
+				"." + MainActivity.YEAR;
 		}
 	}
 

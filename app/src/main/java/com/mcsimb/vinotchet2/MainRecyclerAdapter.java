@@ -10,17 +10,25 @@ import android.widget.TextView;
 import com.mcsimb.vinotchet2.MainFragment.OnFragmentInteractionListener;
 
 import java.util.List;
+import android.view.GestureDetector.OnContextClickListener;
+import android.view.MotionEvent;
+import android.view.View.OnLongClickListener;
 
-class MainRecyclerAdapter extends RecyclerView.Adapter<MainRecyclerAdapter.ViewHolder> {
+public class MainRecyclerAdapter extends RecyclerView.Adapter<MainRecyclerAdapter.ViewHolder> {
 
-	private final List<RecyclerContent.Item> mItems;
+	private List<RecyclerContent.Item> mItems;
 	private final OnFragmentInteractionListener mListener;
 
-	MainRecyclerAdapter(List<RecyclerContent.Item> items, OnFragmentInteractionListener listener) {
+	public MainRecyclerAdapter(List<RecyclerContent.Item> items, OnFragmentInteractionListener listener) {
 		mItems = items;
 		mListener = listener;
 	}
 
+	public void setItems(List<RecyclerContent.Item> items) {
+		mItems = items;
+		notifyDataSetChanged();
+	}
+	
 	@Override
 	public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 		View view = LayoutInflater.from(parent.getContext())
@@ -46,6 +54,15 @@ class MainRecyclerAdapter extends RecyclerView.Adapter<MainRecyclerAdapter.ViewH
 				}
 			}
 		});
+		
+		
+		holder.mView.setOnLongClickListener(new OnLongClickListener() {
+				@Override
+				public boolean onLongClick(View v) {
+					
+					return false;
+				}
+			});
 	}
 
 	@Override

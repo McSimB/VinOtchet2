@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import static com.mcsimb.vinotchet2.MainActivity.MONTH;
 import static com.mcsimb.vinotchet2.MainActivity.YEAR;
+import android.content.Intent;
 
 public class AddActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -47,7 +48,7 @@ public class AddActivity extends AppCompatActivity implements View.OnClickListen
 		TextView monthYear = (TextView) findViewById(R.id.text_month_year_add);
 		mSetDate.setText(mCurrentDate);
 		monthYear.setText("." + MONTH + "." + YEAR);
-		ArrayAdapter<String> adapterSort = new ArrayAdapter<>(this,
+		ArrayAdapter<String> adapterSort = new ArrayAdapter<String>(this,
 				android.R.layout.simple_dropdown_item_1line, sorts);
 		final Spinner spinnerWine = (Spinner) findViewById(R.id.spinner_set_wine_add);
 		spinnerWine.setAdapter(adapterSort);
@@ -73,7 +74,7 @@ public class AddActivity extends AppCompatActivity implements View.OnClickListen
 			}
 		});
 
-		ArrayAdapter<String> adapterVol = new ArrayAdapter<>(this,
+		ArrayAdapter<String> adapterVol = new ArrayAdapter<String>(this,
 				android.R.layout.simple_dropdown_item_1line, volumes);
 		Spinner spinnerVol = (Spinner) findViewById(R.id.spinner_set_vol_add);
 		spinnerVol.setAdapter(adapterVol);
@@ -88,7 +89,7 @@ public class AddActivity extends AppCompatActivity implements View.OnClickListen
 			}
 		});
 
-		/*spinnerVol.setOnTouchListener(new View.OnTouchListener() {
+		spinnerVol.setOnTouchListener(new View.OnTouchListener() {
 			@Override
 			public boolean onTouch(View v, MotionEvent event) {
 				InputMethodManager imm = (InputMethodManager)
@@ -96,7 +97,7 @@ public class AddActivity extends AppCompatActivity implements View.OnClickListen
 				imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
 				return false;
 			}
-		});*/
+		});
 	}
 
 	@Override
@@ -119,8 +120,11 @@ public class AddActivity extends AppCompatActivity implements View.OnClickListen
 				values.put(DBHelper.COUNTER_1, mCounter1.getText().toString());
 				values.put(DBHelper.COUNTER_2, mCounter2.getText().toString());
 				mDBHelper.addEntry(values);
+				setResult(RESULT_OK);
 				exit();
+				break;
 			case R.id.button_cancel_add:
+				setResult(RESULT_CANCELED);
 				exit();
 		}
 	}

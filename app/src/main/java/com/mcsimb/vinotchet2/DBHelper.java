@@ -36,15 +36,15 @@ public class DBHelper extends SQLiteOpenHelper {
 	@Override
 	public void onCreate(SQLiteDatabase db) {
 		db.execSQL("CREATE TABLE " + SORTS_TABLE + " (_id INTEGER PRIMARY KEY, " +
-				WINE + " TEXT, " + ICON + " INTEGER)");
+				   WINE + " TEXT, " + ICON + " INTEGER)");
 		db.execSQL("INSERT INTO " + SORTS_TABLE + " VALUES (1, ?, " + R.drawable.ic_0 + ")",
-				new String[] {mContext.getString(R.string.wine0)});
+				   new String[] {mContext.getString(R.string.wine0)});
 		db.execSQL("INSERT INTO " + SORTS_TABLE + " VALUES (2, ?, " + R.drawable.ic_1 + ")",
-				new String[] {mContext.getString(R.string.wine1)});
+				   new String[] {mContext.getString(R.string.wine1)});
 		db.execSQL("INSERT INTO " + SORTS_TABLE + " VALUES (3, ?, " + R.drawable.ic_2 + ")",
-				new String[] {mContext.getString(R.string.wine2)});
+				   new String[] {mContext.getString(R.string.wine2)});
 		db.execSQL("INSERT INTO " + SORTS_TABLE + " VALUES (4, ?, " + R.drawable.ic_3 + ")",
-				new String[] {mContext.getString(R.string.wine3)});
+				   new String[] {mContext.getString(R.string.wine3)});
 	}
 
 	@Override
@@ -54,15 +54,15 @@ public class DBHelper extends SQLiteOpenHelper {
 	public void newMonth(String month) {
 		SQLiteDatabase db = getWritableDatabase();
 		db.execSQL("CREATE TABLE " + DATA_TABLE + month +
-				" (_id INTEGER PRIMARY KEY, " + DAY + " TEXT, " + WINE_ID + " INTEGER, " +
-				VOLUME + " REAL, " + COUNTER_1 + " INTEGER, " + COUNTER_2 + " INTEGER)");
+				   " (_id INTEGER PRIMARY KEY, " + DAY + " TEXT, " + WINE_ID + " INTEGER, " +
+				   VOLUME + " REAL, " + COUNTER_1 + " INTEGER, " + COUNTER_2 + " INTEGER)");
 	}
 
 	public List<String> getDays() {
 		List<String> days = new ArrayList<>();
 		SQLiteDatabase db = getReadableDatabase();
 		Cursor cursor = db.query(true, DATA_TABLE + MONTH, new String[]{DAY},
-				null, null, null, null, null, null);
+								 null, null, null, null, null, null);
 		if (cursor.moveToFirst()) {
 			do {
 				days.add(cursor.getString(cursor.getColumnIndex(DAY)));
@@ -76,28 +76,26 @@ public class DBHelper extends SQLiteOpenHelper {
 		List<String[]> entries = new ArrayList<>();
 		String curDay = getDays().get(position);
 		SQLiteDatabase db = getReadableDatabase();
-		Cursor cData = db.query(DATA_TABLE + MONTH, null, DAY + " = ?", new String[]{curDay},
-				null, null, null);
-		Cursor cSorts;
-		if (cData.moveToFirst()) {
+		String table = DATA_TABLE + MONTH + " INNER JOIN " + SORTS_TABLE + " ON " + SORTS_TABLE + "._id = " + WINE_ID;
+		String[] columns = new String[] {WINE, VOLUME, COUNTER_1, COUNTER_2, ICON};
+		Cursor cursor = db.query(table, columns, DAY + " = ?", new String[]{curDay},
+								null, null, null);
+		if (cursor.moveToFirst()) {
 			do {
 				String[] str = new String[4];
-				cSorts = db.query(SORTS_TABLE, null, "_id = ?",
-						new String[] {cData.getString(cData.getColumnIndex(WINE_ID))}, null, null, null);
-				str[0] = cSorts.getString(cSorts.getColumnIndex(WINE)) + " " +
-						cData.getString(cData.getColumnIndex(VOLUME));
-				str[1] = cData.getString(cData.getColumnIndex(COUNTER_1));
-				str[2] = cData.getString(cData.getColumnIndex(COUNTER_2));
-				str[3] = cSorts.getString(cSorts.getColumnIndex(ICON));
+				str[0] = cursor.getString(cursor.getColumnIndex(WINE)) +
+					cursor.getString(cursor.getColumnIndex(VOLUME));
+				str[1] = cursor.getString(cursor.getColumnIndex(COUNTER_1));
+				str[2] = cursor.getString(cursor.getColumnIndex(COUNTER_2));
+				str[3] = cursor.getString(cursor.getColumnIndex(ICON));
 				entries.add(str);
-				cSorts.close();
-			} while (cData.moveToNext());
+			} while (cursor.moveToNext());
 		}
-		cData.close();
+		cursor.close();
 		return entries;
 	}
 
-	public String[] getSorts(){
+	public String[] getSorts() {
 		String[] sorts = new String[0];
 		SQLiteDatabase db = getReadableDatabase();
 		Cursor cursor = db.query(SORTS_TABLE, null, null, null, null, null, null);
