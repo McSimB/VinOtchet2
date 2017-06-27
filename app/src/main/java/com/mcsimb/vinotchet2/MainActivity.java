@@ -5,49 +5,43 @@ import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
-import android.util.Log;
+import java.util.Calendar;
 import java.util.List;
-import android.support.v4.app.Fragment;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.CardView;
+import android.widget.PopupMenu;
+import android.view.MenuInflater;
 
 public class MainActivity extends AppCompatActivity
-		implements MainFragment.OnFragmentInteractionListener {
+implements MainFragment.OnFragmentInteractionListener {
 
-	public static String MONTH = "06";
-	public static String YEAR = "17";
 	private final static int REQUEST_CODE = 1;
-	
+
 	private MainFragment.MainFragmentStatePagerAdapter mFragmentStatePagerAdapter;
 	private TabLayout mTabLayout;
 	private ViewPager mPager;
 	private DBHelper mDBHelper;
-			
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-
+		
 		Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_main);
 		setSupportActionBar(toolbar);
 
 		mDBHelper = new DBHelper(this);
-		//dbHelper.newMonth(MONTH);
 
 		mFragmentStatePagerAdapter = new MainFragment
-				.MainFragmentStatePagerAdapter(getSupportFragmentManager());
+			.MainFragmentStatePagerAdapter(getSupportFragmentManager());
 		mFragmentStatePagerAdapter.setPages(mDBHelper.getDays());
 		mPager = (ViewPager) findViewById(R.id.pager_main);
 		mPager.setAdapter(mFragmentStatePagerAdapter);
 		mTabLayout = (TabLayout) findViewById(R.id.tabs_main);
 		mTabLayout.setupWithViewPager(mPager);
-		
-		//CardView card = (CardView) findViewById(R.id.card_main);
-		//registerForContextMenu(card);
 	}
 
 	@Override
@@ -68,8 +62,25 @@ public class MainActivity extends AppCompatActivity
 	}
 
 	@Override
-	public void onFragmentInteraction(RecyclerContent.Item item) {
-		Toast.makeText(this, "dummy", Toast.LENGTH_SHORT).show();
+	public void onFragmentInteraction(final MainRecyclerAdapter.ViewHolder holder, final int position) {
+		PopupMenu popup = new PopupMenu(this, holder.mView);
+		MenuInflater inflater = popup.getMenuInflater();
+		inflater.inflate(R.menu.popup_menu_main, popup.getMenu());
+		popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+				@Override
+				public boolean onMenuItemClick(MenuItem item) {
+					switch (item.getItemId()) {
+						case R.id.popup_menu_remove_main:
+							RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler);
+							MainRecyclerAdapter adapter = (MainRecyclerAdapter) recyclerView.getAdapter();
+							adapter.removeItem(position);
+							mDBHelper.deleteEntry(holder.item.id);
+							break;
+					}
+					return false;
+				}
+			});
+		popup.show();
 	}
 
 	@Override
@@ -77,10 +88,11 @@ public class MainActivity extends AppCompatActivity
 		if (resultCode == RESULT_OK) {
 			List<String> days = mDBHelper.getDays();
 			mFragmentStatePagerAdapter.setPages(days);
+			//mPager.setCurrentItem(days.size() - 1);
 			RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler);
 			MainRecyclerAdapter adapter = (MainRecyclerAdapter) recyclerView.getAdapter();
-			adapter.setItems(RecyclerContent.getItems(this, days.size() - 1));
-			mPager.setCurrentItem(days.size() - 1);
+			adapter.setItems(mDBHelper.getItems(days.size() - 1));
+			
 		}
 	}
 
@@ -95,5 +107,5 @@ public class MainActivity extends AppCompatActivity
 		mDBHelper.close();
 		super.onLowMemory();
 	}
-	
+
 }

@@ -16,13 +16,11 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import static com.mcsimb.vinotchet2.MainActivity.MONTH;
-import static com.mcsimb.vinotchet2.MainActivity.YEAR;
-import android.content.Intent;
+import java.util.List;
 
 public class AddActivity extends AppCompatActivity implements View.OnClickListener {
 
-	private EditText mSetDate;
+	private EditText mDateSetter;
 	private String mCurrentDate;
 	private int mWineId;
 	private String mVolume;
@@ -43,11 +41,12 @@ public class AddActivity extends AppCompatActivity implements View.OnClickListen
 		final String[] volumes = {"0,5", "0,7"};
 		mCounter1 = (EditText) findViewById(R.id.text_counter1_add);
 		mCounter2 = (EditText) findViewById(R.id.text_counter2_add);
-		mSetDate = (EditText) findViewById(R.id.text_set_date_add);
-		mCurrentDate = "1";
+		mDateSetter = (EditText) findViewById(R.id.text_set_date_add);
+		List<String> days = mDBHelper.getDays();
+		mCurrentDate = days.size() > 0 ? days.get(days.size() - 1) : "1";
 		TextView monthYear = (TextView) findViewById(R.id.text_month_year_add);
-		mSetDate.setText(mCurrentDate);
-		monthYear.setText("." + MONTH + "." + YEAR);
+		mDateSetter.setText(mCurrentDate);
+		monthYear.setText("." + DBHelper.MONTH + "." + DBHelper.YEAR);
 		ArrayAdapter<String> adapterSort = new ArrayAdapter<String>(this,
 				android.R.layout.simple_dropdown_item_1line, sorts);
 		final Spinner spinnerWine = (Spinner) findViewById(R.id.spinner_set_wine_add);
@@ -105,7 +104,7 @@ public class AddActivity extends AppCompatActivity implements View.OnClickListen
 		ContentValues values = new ContentValues();
 		switch (v.getId()) {
 			case R.id.button_ok_add:
-				if (Integer.decode(mSetDate.getText().toString()) < Integer.decode(mCurrentDate)) {
+				if (Integer.decode(mDateSetter.getText().toString()) < Integer.decode(mCurrentDate)) {
 					Toast.makeText(AddActivity.this, R.string.bad_day, Toast.LENGTH_SHORT).show();
 					break;
 				}
@@ -114,7 +113,7 @@ public class AddActivity extends AppCompatActivity implements View.OnClickListen
 					Toast.makeText(AddActivity.this, R.string.bad_counter, Toast.LENGTH_SHORT).show();
 					break;
 				}
-				values.put(DBHelper.DAY, mSetDate.getText().toString());
+				values.put(DBHelper.DAY, mDateSetter.getText().toString());
 				values.put(DBHelper.WINE_ID, mWineId);
 				values.put(DBHelper.VOLUME, mVolume);
 				values.put(DBHelper.COUNTER_1, mCounter1.getText().toString());
@@ -134,4 +133,10 @@ public class AddActivity extends AppCompatActivity implements View.OnClickListen
 		finish();
 	}
 
+	@Override
+	protected void onDestroy() {
+		mDBHelper.close();
+		super.onDestroy();
+	}
+	
 }

@@ -10,16 +10,14 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
+import com.mcsimb.vinotchet2.R;
 import java.util.List;
-import android.widget.Toast;
-import android.view.View.OnTouchListener;
-import android.view.MotionEvent;
 
 public class MainFragment extends Fragment {
 
 	private static final String ARG_POSITION = "position";
 	private OnFragmentInteractionListener mListener;
+	RecyclerView recycler;
 
 	public MainFragment() {
 	}
@@ -39,15 +37,17 @@ public class MainFragment extends Fragment {
 		final int position = arguments.getInt(ARG_POSITION);
 		View view = inflater.inflate(R.layout.fragment_main, container, false);
 		if (view instanceof RecyclerView) {
-			final Context context = view.getContext();
-			final RecyclerView recyclerView = (RecyclerView) view;
-			recyclerView.setLayoutManager(new LinearLayoutManager(context));
-			recyclerView.setAdapter(
-				new MainRecyclerAdapter(RecyclerContent.getItems(context, position), mListener));
+			Context context = view.getContext();
+			DBHelper dbHelper = new DBHelper(context);
+			recycler = (RecyclerView) view;
+			recycler.setLayoutManager(new LinearLayoutManager(context));
+			recycler.setAdapter(
+				new MainRecyclerAdapter(dbHelper.getItems(position), mListener));
+			dbHelper.close();
 		}
 		return view;
 	}
-	
+
 	@Override
 	public void onAttach(Context context) {
 		super.onAttach(context);
@@ -76,7 +76,7 @@ public class MainFragment extends Fragment {
 	 * >Communicating with Other Fragments</a> for more information.
 	 */
 	public interface OnFragmentInteractionListener {
-		void onFragmentInteraction(RecyclerContent.Item item);
+		void onFragmentInteraction(MainRecyclerAdapter.ViewHolder holder, int position);
 	}
 
 	public static class MainFragmentStatePagerAdapter extends FragmentStatePagerAdapter {
@@ -91,7 +91,7 @@ public class MainFragment extends Fragment {
 			mPages = pages;
 			notifyDataSetChanged();
 		}
-		
+
 		@Override
 		public Fragment getItem(int position) {
 			return MainFragment.newInstance(position);
@@ -104,8 +104,8 @@ public class MainFragment extends Fragment {
 
 		@Override
 		public CharSequence getPageTitle(int position) {
-			return mPages.get(position) + "." + MainActivity.MONTH +
-				"." + MainActivity.YEAR;
+			return mPages.get(position) + "." + DBHelper.MONTH +
+				"." + DBHelper.YEAR;
 		}
 	}
 

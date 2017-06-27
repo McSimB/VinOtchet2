@@ -10,6 +10,8 @@
 	<string name="cancel">Отмена</string>
 	<string name="ok">OK</string>
 	<string name="add">Добавить</string>
+	<string name="edit">Изменить</string>
+	<string name="remove">Удалить</string>
 	<string name="bad_day">Дата не верная!</string>
 	<string name="bad_counter">Данные счётчика не верные!</string>
 	<string name="month_summary">Сводка за месяц</string>
