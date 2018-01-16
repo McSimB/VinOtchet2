@@ -17,6 +17,7 @@ public class DBHelper extends SQLiteOpenHelper {
 	static String DB_NAME = YEAR + ".db";
 	static int DB_VER = 1;
 	
+	final static String ID = "_id";
 	final static String DAY = "day";
 	final static String WINE = "wine";
 	final static String WINE_ID = "wine_id";
@@ -36,7 +37,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
 	@Override
 	public void onCreate(SQLiteDatabase db) {
-		db.execSQL("CREATE TABLE " + SORTS_TABLE + " (_id INTEGER PRIMARY KEY, " +
+		db.execSQL("CREATE TABLE " + SORTS_TABLE + " (" + ID + " INTEGER PRIMARY KEY, " +
 				   WINE + " TEXT, " + ICON + " INTEGER)");
 		db.execSQL("INSERT INTO " + SORTS_TABLE + " VALUES (1, ?, " + R.drawable.ic_0 + ")",
 				   new String[] {mContext.getString(R.string.wine0)});
@@ -76,10 +77,9 @@ public class DBHelper extends SQLiteOpenHelper {
 		List<String[]> entries = new ArrayList<>();
 		String curDay = getDays().get(position);
 		SQLiteDatabase db = getReadableDatabase();
-		String table = DATA_TABLE + MONTH + " INNER JOIN " + SORTS_TABLE + " ON " + SORTS_TABLE + "._id = " + WINE_ID;
-		String[] columns = new String[] {WINE, VOLUME, COUNTER_1, COUNTER_2, ICON, DATA_TABLE + MONTH + "._id"};
-		Cursor cursor = db.query(table, columns, DAY + " = ?", new String[]{curDay},
-								null, null, null);
+		String table = DATA_TABLE + MONTH + " INNER JOIN " + SORTS_TABLE + " ON " + WINE_ID + " = " + SORTS_TABLE + "." + ID;
+		String[] columns = new String[] {WINE, VOLUME, COUNTER_1, COUNTER_2, ICON, DATA_TABLE + MONTH + "." + ID};
+		Cursor cursor = db.query(table, columns, DAY + " = ?", new String[]{curDay}, null, null, null);
 		if (cursor.moveToFirst()) {
 			do {
 				String[] str = new String[5];
@@ -88,7 +88,7 @@ public class DBHelper extends SQLiteOpenHelper {
 				str[1] = cursor.getString(cursor.getColumnIndex(COUNTER_1));
 				str[2] = cursor.getString(cursor.getColumnIndex(COUNTER_2));
 				str[3] = cursor.getString(cursor.getColumnIndex(ICON));
-				str[4] = cursor.getString(cursor.getColumnIndex(DATA_TABLE + MONTH + "._id"));
+				str[4] = cursor.getString(cursor.getColumnIndex(ID));
 				entries.add(str);
 			} while (cursor.moveToNext());
 		}

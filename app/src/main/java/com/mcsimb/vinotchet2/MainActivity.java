@@ -69,6 +69,7 @@ implements MainFragment.OnFragmentInteractionListener {
 		popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
 				@Override
 				public boolean onMenuItemClick(MenuItem item) {
+					Toast.makeText(MainActivity.this, holder.item.id, Toast.LENGTH_SHORT).show();
 					switch (item.getItemId()) {
 						case R.id.popup_menu_remove_main:
 							RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler);
@@ -87,12 +88,18 @@ implements MainFragment.OnFragmentInteractionListener {
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if (resultCode == RESULT_OK) {
 			List<String> days = mDBHelper.getDays();
+			if (mFragmentStatePagerAdapter.getCount() > 0) {
+				MainFragment fragment = (MainFragment) mFragmentStatePagerAdapter.getItem(mFragmentStatePagerAdapter.getCount() - 1);
+				fragment.update();
+			}
 			mFragmentStatePagerAdapter.setPages(days);
-			//mPager.setCurrentItem(days.size() - 1);
-			RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler);
-			MainRecyclerAdapter adapter = (MainRecyclerAdapter) recyclerView.getAdapter();
-			adapter.setItems(mDBHelper.getItems(days.size() - 1));
+			mPager.setCurrentItem(days.size() - 1);
 			
+			//MainFragment fragment = (MainFragment) mFragmentStatePagerAdapter.getItem(days.size() - 1);
+			
+			//RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler);
+			//MainRecyclerAdapter adapter = (MainRecyclerAdapter) recyclerView.getAdapter();
+			//adapter.addItem(items.get(items.size() - 1));
 		}
 	}
 

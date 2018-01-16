@@ -17,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.List;
+import android.view.View.OnTouchListener;
 
 public class AddActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -47,6 +48,7 @@ public class AddActivity extends AppCompatActivity implements View.OnClickListen
 		TextView monthYear = (TextView) findViewById(R.id.text_month_year_add);
 		mDateSetter.setText(mCurrentDate);
 		monthYear.setText("." + DBHelper.MONTH + "." + DBHelper.YEAR);
+		
 		ArrayAdapter<String> adapterSort = new ArrayAdapter<String>(this,
 				android.R.layout.simple_dropdown_item_1line, sorts);
 		final Spinner spinnerWine = (Spinner) findViewById(R.id.spinner_set_wine_add);
@@ -63,7 +65,7 @@ public class AddActivity extends AppCompatActivity implements View.OnClickListen
 			}
 		});
 
-		spinnerWine.setOnTouchListener(new View.OnTouchListener() {
+		/*spinnerWine.setOnTouchListener(new View.OnTouchListener() {
 			@Override
 			public boolean onTouch(View v, MotionEvent event) {
 				InputMethodManager imm = (InputMethodManager)
@@ -71,7 +73,7 @@ public class AddActivity extends AppCompatActivity implements View.OnClickListen
 				imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
 				return false;
 			}
-		});
+		});*/
 
 		ArrayAdapter<String> adapterVol = new ArrayAdapter<String>(this,
 				android.R.layout.simple_dropdown_item_1line, volumes);
@@ -88,7 +90,7 @@ public class AddActivity extends AppCompatActivity implements View.OnClickListen
 			}
 		});
 
-		spinnerVol.setOnTouchListener(new View.OnTouchListener() {
+		/*spinnerVol.setOnTouchListener(new View.OnTouchListener() {
 			@Override
 			public boolean onTouch(View v, MotionEvent event) {
 				InputMethodManager imm = (InputMethodManager)
@@ -96,14 +98,17 @@ public class AddActivity extends AppCompatActivity implements View.OnClickListen
 				imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
 				return false;
 			}
-		});
+		});*/
+
 	}
 
 	@Override
 	public void onClick(View v) {
+		// TODO: подтверждение ввода данных с помощью виртуальной клавиатуры
 		ContentValues values = new ContentValues();
 		switch (v.getId()) {
 			case R.id.button_ok_add:
+				// TODO: проверка на правильность ввода данных
 				if (Integer.decode(mDateSetter.getText().toString()) < Integer.decode(mCurrentDate)) {
 					Toast.makeText(AddActivity.this, R.string.bad_day, Toast.LENGTH_SHORT).show();
 					break;

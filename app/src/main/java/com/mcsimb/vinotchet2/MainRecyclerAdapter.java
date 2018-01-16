@@ -8,9 +8,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import com.mcsimb.vinotchet2.MainFragment.OnFragmentInteractionListener;
 import java.util.List;
-import android.support.v7.widget.PopupMenu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 
 public class MainRecyclerAdapter extends RecyclerView.Adapter<MainRecyclerAdapter.ViewHolder> {
 

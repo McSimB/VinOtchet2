@@ -10,14 +10,13 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import com.mcsimb.vinotchet2.R;
 import java.util.List;
 
 public class MainFragment extends Fragment {
 
 	private static final String ARG_POSITION = "position";
 	private OnFragmentInteractionListener mListener;
-	RecyclerView recycler;
+	private RecyclerView recycler;
 
 	public MainFragment() {
 	}
@@ -41,8 +40,9 @@ public class MainFragment extends Fragment {
 			DBHelper dbHelper = new DBHelper(context);
 			recycler = (RecyclerView) view;
 			recycler.setLayoutManager(new LinearLayoutManager(context));
+			List<DBHelper.Item> items = dbHelper.getItems(position);
 			recycler.setAdapter(
-				new MainRecyclerAdapter(dbHelper.getItems(position), mListener));
+				new MainRecyclerAdapter(items, mListener));
 			dbHelper.close();
 		}
 		return view;
@@ -64,7 +64,11 @@ public class MainFragment extends Fragment {
 		super.onDetach();
 		mListener = null;
 	}
-
+	
+	public void update() {
+		recycler.getAdapter().notifyDataSetChanged();
+	}
+	
 	/**
 	 * This interface must be implemented by activities that contain this
 	 * fragment to allow an interaction in this fragment to be communicated
