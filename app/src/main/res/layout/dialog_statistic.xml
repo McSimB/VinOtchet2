@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  android:paddingLeft="?attr/dialogPreferredPadding"
+  android:paddingRight="?attr/dialogPreferredPadding"
+  android:paddingTop="@dimen/abc_dialog_padding_top_material"
+  android:orientation="vertical"
+  tools:viewBindingIgnore="true">
+
+  <TextView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="8dp"
+    android:text="@string/made"
+    android:textAppearance="?attr/textAppearanceTitleMedium"
+    android:textColor="?attr/colorPrimary" />
+
+  <TextView
+    android:id="@+id/tv_dialog_made"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:fontFamily="@font/roboto_mono_regular"
+    android:textAppearance="?attr/textAppearanceTitleLarge"
+    tools:text="Бутылок 0,5    26166\n\Бутылок 0,7    78516\nВсего,дал    34556,6" />
+
+  <TextView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="8dp"
+    android:text="@string/rest"
+    android:textAppearance="?attr/textAppearanceTitleMedium"
+    android:textColor="?attr/colorPrimary" />
+
+  <TextView
+    android:id="@+id/tv_dialog_rest"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:fontFamily="@font/roboto_mono_regular"
+    android:textAppearance="?attr/textAppearanceTitleLarge"
+    tools:text="Виталиана     3457.4\nМелодии лета  7554.6\nУдачное        456.7" />
+
+</LinearLayout>
+

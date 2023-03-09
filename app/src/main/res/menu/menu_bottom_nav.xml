@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+  <!--<item
+    android:id="@+id/menu_home"
+    android:title="@string/log"
+    android:icon="@drawable/ic_home"/>-->
+
+  <item
+    android:id="@+id/menu_statistic"
+    android:title="@string/statistic"
+    android:icon="@drawable/ic_info"/>
+
+  <item android:id="@+id/menu_production"
+    android:title="@string/production"
+    android:icon="@drawable/ic_assesment"/>
+
+  <item android:id="@+id/menu_materials"
+    android:title="@string/materials"
+    android:icon="@drawable/ic_calendar_range"/>
+
+</menu>

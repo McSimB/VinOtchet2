@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="?attr/listPreferredItemHeightSmall"
+  tools:viewBindingIgnore="true">
+
+  <TextView
+    android:id="@+id/text_sum"
+    android:layout_width="52dp"
+    android:layout_height="wrap_content"
+    android:layout_centerVertical="true"
+    android:gravity="end"
+    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+    android:textColor="?attr/colorPrimary"
+    tools:ignore="TextSizeCheck"
+    tools:text="00000" />
+
+  <TextView
+    android:id="@+id/text_start"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="20dp"
+    android:layout_centerVertical="true"
+    android:layout_toEndOf="@id/text_sum"
+    android:textAppearance="?attr/textAppearanceBody1"
+    android:textColor="#000000"
+    tools:text="Ю065 009289000" />
+
+  <TextView
+    android:id="@+id/text_end"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="20dp"
+    android:layout_centerVertical="true"
+    android:layout_toEndOf="@id/text_start"
+    android:textAppearance="?attr/textAppearanceBody1"
+    android:textColor="#000000"
+    tools:text="Ю090 007856890" />
+
+  <TextView
+    android:id="@+id/text_rest"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginEnd="8dp"
+    android:layout_alignParentEnd="true"
+    android:layout_centerVertical="true"
+    android:gravity="end"
+    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+    android:textColor="?attr/colorPrimary"
+    tools:ignore="RelativeOverlap"
+    tools:text="15000" />
+
+</RelativeLayout>
+

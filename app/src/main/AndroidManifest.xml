@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:tools="http://schemas.android.com/tools">
+
+  <application
+    android:allowBackup="true"
+    android:icon="@drawable/ic_launcher"
+    android:label="@string/app_name"
+    android:name=".App"
+    android:theme="@style/Theme.App">
+
+    <activity
+      android:exported="true"
+      android:name=".MainActivity"
+      android:screenOrientation="portrait"
+      tools:ignore="LockedOrientationActivity">
+      <intent-filter>
+        <action android:name="android.intent.action.MAIN" />
+        <category android:name="android.intent.category.LAUNCHER" />
+      </intent-filter>
+    </activity>
+
+    <activity
+      android:exported="false"
+      android:label="@string/add_title"
+      android:name=".AddActivity"
+      android:screenOrientation="portrait"
+      android:windowSoftInputMode="stateVisible|adjustResize"
+      tools:ignore="LockedOrientationActivity" />
+
+    <activity
+      android:exported="false"
+      android:name=".LogActivity"
+      android:screenOrientation="portrait"
+      tools:ignore="LockedOrientationActivity" />
+
+    <activity
+      android:exported="false"
+      android:label="@string/mat_consumption"
+      android:name=".activity.MaterialsActivity"
+      android:screenOrientation="portrait"
+      tools:ignore="LockedOrientationActivity" />
+
+    <activity
+      android:exported="false"
+      android:label="@string/doc_stamps"
+      android:name=".activity.StampsActivity"
+      android:screenOrientation="portrait"
+      tools:ignore="LockedOrientationActivity" />
+
+    <activity android:name=".common.crash.CrashHandler$CrashActivity" />
+
+  </application>
+
+</manifest>

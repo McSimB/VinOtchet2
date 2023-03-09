@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:padding="8dp"
+  android:orientation="vertical"
+  tools:viewBindingIgnore="true">
+
+  <com.google.android.material.appbar.MaterialToolbar
+    android:id="@+id/toolbar"
+    android:layout_width="match_parent"
+    android:layout_height="?attr/actionBarSize" />
+
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="16dp"
+    android:orientation="horizontal">
+
+    <TextView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="8dp"
+      android:layout_marginEnd="80dp"
+      android:labelFor="@+id/set_date"
+      android:text="@string/date1" />
+
+    <EditText
+      android:id="@+id/set_date"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:gravity="end"
+      android:inputType="date"
+      android:minWidth="48dp"
+      android:selectAllOnFocus="true"
+      android:textSize="30sp"
+      tools:text="28" />
+
+    <TextView
+      android:id="@+id/month_year"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:textSize="30sp"
+      tools:text=".02.82" />
+
+  </LinearLayout>
+
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="60dp"
+    android:layout_marginBottom="16dp"
+    android:orientation="horizontal">
+
+    <Spinner
+      android:id="@+id/set_sort"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:layout_marginEnd="16dp"
+      android:layout_weight="1" />
+
+    <Spinner
+      android:id="@+id/set_tare"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:layout_weight="2" />
+
+  </LinearLayout>
+
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="16dp"
+    android:orientation="horizontal">
+
+    <TextView
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_weight="1"
+      android:layout_marginStart="8dp"
+      android:layout_gravity="center_vertical"
+      android:labelFor="@+id/add_counter1"
+      android:text="@string/counter1" />
+
+    <EditText
+      android:id="@+id/add_counter1"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_weight="1"
+      android:layout_marginLeft="10dp"
+      android:layout_marginRight="10dp"
+      android:gravity="end"
+      android:inputType="number"
+      android:textSize="36sp"
+      tools:text="5647" />
+
+  </LinearLayout>
+
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="16dp"
+    android:orientation="horizontal">
+
+    <TextView
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_weight="1"
+      android:layout_marginStart="8dp"
+      android:layout_gravity="center_vertical"
+      android:labelFor="@+id/add_counter2"
+      android:text="@string/counter2" />
+
+    <EditText
+      android:id="@+id/add_counter2"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_weight="1"
+      android:layout_marginLeft="10dp"
+      android:layout_marginRight="10dp"
+      android:gravity="end"
+      android:inputType="number"
+      android:textSize="36sp" />
+
+  </LinearLayout>
+
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal">
+
+    <Button
+      android:id="@+id/add_ok"
+      android:layout_width="0dp"
+      android:layout_height="50dp"
+      android:layout_marginStart="24dp"
+      android:layout_marginEnd="32dp"
+      android:layout_weight="1"
+      android:layout_gravity="bottom"
+      android:onClick="onClick"
+      android:text="@string/save" />
+
+  </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  android:paddingTop="@dimen/abc_dialog_padding_top_material"
+  android:paddingLeft="?attr/dialogPreferredPadding"
+  android:paddingRight="?attr/dialogPreferredPadding"
+  android:orientation="vertical"
+  tools:viewBindingIgnore="true">
+
+  <TextView
+    android:id="@+id/text_view_sort_dialog_blend"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_horizontal"
+    android:textAppearance="?attr/textAppearanceTitleMedium"
+    tools:text="Мелодии лета" />
+
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_horizontal"
+    android:orientation="horizontal">
+
+    <EditText
+      android:id="@+id/edit_text_volume_dialog_blend"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:hint="@string/volume"
+      android:importantForAutofill="no"
+      android:inputType="numberDecimal"
+      android:textAppearance="?attr/textAppearanceTitleLarge"
+      tools:text="5190.1" />
+
+    <TextView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="8dp"
+      android:text="@string/dal" />
+
+  </LinearLayout>
+
+</LinearLayout>
+

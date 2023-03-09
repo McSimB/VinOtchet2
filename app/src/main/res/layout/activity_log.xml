@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  tools:viewBindingIgnore="true">
+  
+  <com.google.android.material.appbar.MaterialToolbar
+    android:id="@+id/toolbar"
+    android:layout_width="match_parent"
+    android:layout_height="?attr/actionBarSize" />
+
+  <Button
+    android:id="@+id/btn_log_prev"
+    style="@style/Widget.Material3.Button.TonalButton"
+    android:layout_width="wrap_content"
+    android:layout_height="60dp"
+    android:layout_marginTop="8dp"
+    android:layout_marginStart="8dp"
+    android:layout_alignParentStart="true"
+    android:layout_below="@+id/toolbar"
+    android:onClick="onClick"
+    android:text="@string/left_arrow" />
+
+  <Button
+    android:id="@+id/btn_log_next"
+    style="@style/Widget.Material3.Button.TonalButton"
+    android:layout_width="wrap_content"
+    android:layout_height="60dp"
+    android:layout_marginTop="8dp"
+    android:layout_marginEnd="8dp"
+    android:layout_alignParentEnd="true"
+    android:layout_below="@+id/toolbar"
+    android:onClick="onClick"
+    android:text="@string/right_arrow" />
+
+  <Spinner
+    android:id="@+id/spin_log_sort_select"
+    android:layout_width="0dp"
+    android:layout_height="60dp"
+    android:layout_marginStart="8dp"
+    android:layout_centerHorizontal="true"
+    android:layout_toEndOf="@id/btn_log_prev"
+    android:layout_toStartOf="@id/btn_log_next"
+    android:layout_below="@+id/toolbar"
+    tools:visibility="invisible"/>
+
+  <TextView
+    android:id="@+id/text_log_blend"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="42dp"
+    android:layout_marginStart="8dp"
+    android:layout_alignStart="@id/spin_log_sort_select"
+    android:layout_below="@+id/toolbar"
+    android:textSize="14sp" />
+
+  <TextView
+    android:id="@+id/text_log_date"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="16dp"
+    android:layout_centerHorizontal="true"
+    android:layout_below="@+id/toolbar"
+    android:textSize="17sp"
+    android:visibility="invisible"
+    tools:text="23.07"/>
+
+  <TextView
+    android:id="@+id/text_log_sort"
+    android:textStyle="bold"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="36dp"
+    android:layout_centerHorizontal="true"
+    android:layout_below="@+id/toolbar"
+    android:textSize="19sp"
+    android:visibility="invisible"
+    tools:text="Мелодии лета 0.5"/>
+
+  <LinearLayout
+    android:id="@+id/linear_layout_log_1"
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:layout_below="@id/btn_log_prev"
+    android:orientation="horizontal"
+    android:visibility="gone">
+
+    <TextView
+      android:id="@+id/text_log_1"
+      android:layout_width="match_parent"
+      android:layout_height="36dp"
+      android:layout_weight="1"
+      android:layout_marginLeft="16dp"
+      android:layout_marginRight="16dp"
+      android:layout_gravity="center_vertical"
+      android:paddingLeft="8dp"
+      android:paddingRight="8dp"
+      android:background="@drawable/rect_rounded_frame"
+      android:gravity="center_vertical"
+      android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+      android:id="@+id/text_log_2"
+      android:layout_width="match_parent"
+      android:layout_height="36dp"
+      android:layout_weight="1"
+      android:layout_marginLeft="16dp"
+      android:layout_marginRight="16dp"
+      android:layout_gravity="center_vertical"
+      android:paddingLeft="8dp"
+      android:paddingRight="8dp"
+      android:background="@drawable/rect_rounded_frame"
+      android:gravity="center_vertical"
+      android:textAppearance="?android:attr/textAppearanceLarge" />
+
+  </LinearLayout>
+
+  <LinearLayout
+    android:id="@+id/linear_layout_log_2"
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:layout_below="@id/linear_layout_log_1"
+    android:orientation="horizontal"
+    android:visibility="gone">
+
+    <TextView
+      android:id="@+id/text_log_3"
+      android:layout_width="match_parent"
+      android:layout_height="36dp"
+      android:layout_weight="1"
+      android:layout_marginLeft="16dp"
+      android:layout_marginRight="16dp"
+      android:layout_gravity="center_vertical"
+      android:paddingLeft="8dp"
+      android:paddingRight="8dp"
+      android:background="@drawable/rect_rounded_frame"
+      android:gravity="center_vertical"
+      android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+      android:id="@+id/text_log_4"
+      android:layout_width="match_parent"
+      android:layout_height="36dp"
+      android:layout_weight="1"
+      android:layout_marginLeft="16dp"
+      android:layout_marginRight="16dp"
+      android:layout_gravity="center_vertical"
+      android:paddingLeft="8dp"
+      android:paddingRight="8dp"
+      android:background="@drawable/rect_rounded_frame"
+      android:gravity="center_vertical"
+      android:textAppearance="?android:attr/textAppearanceLarge" />
+
+  </LinearLayout>
+
+  <TableLayout
+    android:id="@+id/table_layout_log"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="8dp"
+    android:layout_below="@id/linear_layout_log_2"
+    android:stretchColumns="*" />
+
+</RelativeLayout>
